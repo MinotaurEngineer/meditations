@@ -935,29 +935,37 @@
           const json = JSON.parse(data)
 
           if (json.havamal && json.hackerlaws) {
-
             const { havamal, hackerlaws } = json
 
-            const rnd = Math.random()
+            const refreshAction = document.querySelector('button.refresh')
 
-            const havamalItem = havamal[Math.floor(rnd * havamal.length)]
-            const hackerlawsItem = hackerlaws[Math.floor(rnd * hackerlaws.length)]
+            function refresh() {
+              const rnd = Math.random()
 
-            const havamalSlideH1 = document.querySelector('.type-havamal h1')
-            const havamalSlideParagraph = document.querySelector('.type-havamal p')
+              const havamalItem = havamal[Math.floor(rnd * havamal.length)]
+              const hackerlawsItem = hackerlaws[Math.floor(rnd * hackerlaws.length)]
 
-            const hackerlawsSlideH1 = document.querySelector('.type-hackerlaws h1')
-            const hackerlawsSlideParagraph = document.querySelector('.type-hackerlaws p')
+              const havamalSlideH1 = document.querySelector('.type-havamal h1')
+              const havamalSlideParagraph = document.querySelector('.type-havamal p')
 
-            havamalSlideH1.textContent = havamalItem.quote
-            havamalSlideParagraph.textContent = havamalItem.info
+              const hackerlawsSlideH1 = document.querySelector('.type-hackerlaws h1')
+              const hackerlawsSlideParagraph = document.querySelector('.type-hackerlaws p')
 
-            hackerlawsSlideH1.textContent = hackerlawsItem.quote
-            hackerlawsSlideParagraph.textContent = hackerlawsItem.info
+              havamalSlideH1.textContent = havamalItem.quote
+              havamalSlideParagraph.textContent = havamalItem.info
+
+              hackerlawsSlideH1.textContent = hackerlawsItem.quote
+              hackerlawsSlideParagraph.textContent = hackerlawsItem.info
+            }
+
+            refresh()
+
+            refreshAction.addEventListener('click', refresh, { passive: true })
 
           }
         }
       }
+
       window.addEventListener('load', load, { passive: true, once: true })
     </script>
     <style>
@@ -1084,6 +1092,36 @@
         padding: 3rem;
         max-width: 768px;
       }
+
+      button.refresh {
+        background-color: white;
+        color: black;
+        position: fixed;
+        top: 3rem;
+        right: 3rem;
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+        border-width: 0;
+        border-radius: 2rem;
+        font-size: 3rem;
+        padding-bottom: 0.75rem;
+        padding-inline-start: 1rem;
+        padding-inline-end: 0.75rem;
+      }
+    </style>
+    <style>
+      @media screen and (prefers-color-scheme: dark) {
+        .type-havamal {
+          color: #F7F5F0;
+          background-color: #3C2E26;
+        }
+
+        .type-hackerlaws {
+          color: #E8E6E3;
+          background-color: #2B1810;
+        }
+      }
     </style>
   </head>
 
@@ -1112,6 +1150,9 @@
           the remaining 90% accounted for an average of 2%</p>
       </blockquote>
     </section>
+
+
+    <button type='button' class='refresh'>&#10227;</button>
 
   </body>
 
